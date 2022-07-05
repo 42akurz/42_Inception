@@ -1,0 +1,23 @@
+version: '3.9'
+
+# each item in services is a container to form the docker network
+services:
+  ngninx:
+    build:
+      context: ./nginx/
+      dockerfile: Dockerfile
+    # acts like sym link (allows to copy files)
+    volumes:
+
+  mariadb:
+    build:
+      context: ./mariadb/
+      dockerfile: Dockerfile
+    # environment variables, that are passed to the image
+    environment:
+      MYSQL_DATABSE: wp
+      MYSQL_USER: wp
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+
+  wordpress:

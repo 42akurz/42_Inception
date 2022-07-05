@@ -466,8 +466,8 @@ Nginx:
 	NGINX is open source software for web serving, reverse proxying, caching, load balancing,
 	media streaming, and more.
 
-  Check Nginx status:
-      service nginx status
+Check Nginx status:
+	service nginx status
 
 
 -------------------------------------------------------------------------------------------------
