@@ -2,10 +2,10 @@ FROM debian:buster
 
 RUN apt-get update -y && \
 	apt-get upgrade -y && \
-	apt install -y php-mysql && \
-	apt install -y mysql-server
+	# apt-get install -y php-mysqli && \
+	apt install -y mariadb-server
 
-	# apt-get install mariadb-server -y
+COPY ./installer.sh /
 
-
-# ENTRYPOINT [ "mysql", "-u", "root", "-p" ]
+# run wordpress installation script
+ENTRYPOINT [ "./installer.sh" ]
