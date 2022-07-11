@@ -2,8 +2,8 @@ FROM debian:buster
 
 RUN apt-get update -y && \
 	apt-get upgrade -y && \
-	apt-get install -y nginx && \
-	apt-get install -y openssl
+	apt-get install -y nginx \
+	openssl
 
 # create self-signed ssl certificates for TLS
 RUN openssl req -newkey rsa:4096 \
@@ -18,6 +18,7 @@ RUN openssl req -newkey rsa:4096 \
 # copy html file into container
 RUN mkdir template
 COPY my.html /template/.
+# COPY my.php /template/.
 
 # put config file in sites-enabled -> nginx reads it from there
 COPY my.conf /etc/nginx/sites-enabled/.
