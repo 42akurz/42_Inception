@@ -1,20 +1,23 @@
 #!/bin/bash
 
-service mysql start
 
-mysql -Bse "CREATE DATABASE wp_database;CREATE USER 'alex'@'localhost' IDENTIFIED BY 'alex123';GRANT ALL ON wp_database.* TO 'alex'@'localhost';FLUSH PRIVILEGES;"
-
-# download wp
-cd wordpress
 
 wp core download --allow-root
 
+cp /wp-config.php /var/www/wordpress/
+
 # create wp config file with db_name, db_user and db_password 
-wp config create --allow-root --dbname=wp_database --dbuser=alex --dbpass=alex123
+# wp config create	--dbhost=$DB_HOST \
+# 					--dbname=$DB_NAME \
+# 					--dbuser=$DB_USER \
+# 					--dbpass=$DB_PASSWORD \
+# 					--allow-root
 
 # install wp
-wp core install --url=10.11.249.212 --title=title --admin_user=admin --admin_password=Agusc23. --admin_email=email@email.de --skip-email --allow-root
+wp core install --url=$WP_URL --title=$WP_TITLE --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL --skip-email --allow-root
 
-# keep container running
+# to fix error: enable to create .pid file, cause /run/php directory doesn't exist
 mkdir -p /var/run/php
+
+# run php-fpm7.3 listening for CGI request and force to stay in foreground and ignore daemonize option fromm configuration file
 php-fpm7.3 -F

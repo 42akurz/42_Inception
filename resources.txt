@@ -1,0 +1,9 @@
+The server environment requirement for wordpress : https://make.wordpress.org/hosting/handbook/server-environment/#system-packages (about php and php modules)
+
+Wordpress caching and performance: https://make.wordpress.org/hosting/handbook/performance/
+
+Recommanded nginx config for wp : https://wordpress.org/support/article/nginx/#general-wordpress-rules and https://www.nginx.com/resources/wiki/start/topics/recipes/wordpress/
+
+Docker doc about best practice (the part on entrypoint can be useful) : https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#entrypoint
+
+Looking on the officiel docker image for the entrypoint command of nginx and wordpress: https://github.com/nginxinc/docker-nginx/blob/master/Dockerfile-alpine.template#L123 and https://github.com/docker-library/php/blob/master/8.0/alpine3.16/fpm/Dockerfile#L256

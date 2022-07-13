@@ -8,13 +8,29 @@ version: '3.9'
 
 # A volume does not increase the size of the containers using it. 
 # The volume’s contents exist outside the lifecycle of a given container.
+
+
+
+# volumes:      While it is possible to declare volumes on the fly as part of the service declaration, 
+#               this section allows you to create named volumes that can be reused across multiple services
+# driver:       specify which volume driver should be used for this volume. 
+#               Defaults to whatever driver the Docker Engine has been configured to use, which in most cases is local. 
+# driver_opts:  Specify a list of options as key-value pairs to pass to the driver for this volume.
+# type:         'none' -> no physical disk partition linked to the mount point
+# device:       path to safed volumes        
 volumes:
   WordPress:
-    name: WordPress_v
     driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/akurz/data/wordpress
   MariaDB:
-    name: MariaDB_v
     driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/akurz/data/mariadb
   
 
 
@@ -22,31 +38,43 @@ services:
   mariadb:
     container_name: mariadb_c
     build:
-      context: ./mariadb/
-    env_file: # environment variables, that are passed to the image
+      context: ./mariadb
+    env_file:
       - .env
-    depends_on:
-      - nginx
     volumes:
       - MariaDB:/var/lib/mysql
+    networks:
+      - localhost
+    # restart: always
 
   nginx:
     container_name: nginx_c
     build:
-      context: ./nginx/
-    ports: # mapping public port 443 to port 443 thats running for nginx in conatiner (specified in nginx config)
-      - 443:443
+      context: ./nginx
+    ports:
+      - "443:443"
     volumes:
-      - WordPress:/var/www/html
+      - WordPress:/var/www/wordpress
+    networks:
+      - localhost
+    depends_on:
+      - wordpress
+    # restart: always
 
   wordpress:
     container_name: wordpress_c
     build:
-      context: ./wordpress/
-    env_file: # environment variables, that are passed to the image
+      context: ./wordpress
+    env_file:
       - .env
     depends_on:
       - mariadb
     volumes:
-      - WordPress:/var/www/html
+      - WordPress:/var/www/wordpress
+    networks:
+      - localhost
+    # restart: always
 
+
+networks:
+  localhost: { }
