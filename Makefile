@@ -1,20 +1,30 @@
-
-
 all:
-	sudo docker-compose up
+	mkdir -p /home/akurz/data/mariadb
+	mkdir -p /home/akurz/data/wordpress
+	sudo docker-compose -f ./srcs/docker-compose.yml up
 
 clean:
-	sudo docker-compose down
+	sudo docker-compose -f ./srcs/docker-compose.yml down
 
-re: clean delete all
+fclean:
+	sudo docker-compose -f ./srcs/docker-compose.yml down --volumes --rmi all
+	sudo rm -rf /home/akurz/data
 
-stop:
-	sudo docker kill $$(sudo docker ps -q)
+re: fclean all
+
+nginx:
+	sudo docker-compose -f ./srcs/docker-compose.yml build nginx
+
+wordpress:
+	sudo docker-compose -f ./srcs/docker-compose.yml build wordpress
+
+mariadb:
+	sudo docker-compose -f ./srcs/docker-compose.yml build mariadb
 
 delete:
 	sudo docker container prune -f
 	sudo docker rmi $$(sudo docker images -q)
 
 show:
-	sudo docker image ls -a
 	sudo docker container ls -a
+	sudo docker image ls -a

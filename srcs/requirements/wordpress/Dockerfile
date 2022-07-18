@@ -20,10 +20,10 @@ COPY ./wp-config.php /
 
 # create wordpress direcory -> wordpress CLI will be downloaded here
 RUN mkdir -p /var/www/wordpress
-
 WORKDIR /var/www/wordpress
 
 # install wordpress CLI
+# WP-CLI is the official command line tool for interacting with and managing your WordPress sites.
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar
 

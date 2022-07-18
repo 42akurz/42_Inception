@@ -21,16 +21,16 @@
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 
-define( 'DB_NAME', 'wp_database' );
+define( 'DB_NAME', getenv('DB_NAME') );
 
 ///** Database username */
-define( 'DB_USER', 'alex' );
+define( 'DB_USER', getenv('DB_USER') );
 
 ///** Database password */
-define( 'DB_PASSWORD', 'alex123' );
+define( 'DB_PASSWORD', getenv('DB_PASSWORD') );
 
 /** Database hostname */
-define( 'DB_HOST', 'mariadb_c' );
+define( 'DB_HOST', getenv('DB_HOST') );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -53,14 +53,14 @@ define( 'WP_SITEURL', 'https://akurz.42.fr' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         'ihavenoidea!!!' );
-define( 'SECURE_AUTH_KEY',  'notsorandom!!!' );
-define( 'LOGGED_IN_KEY',    'iamnotveryhappywiththis!!!' );
-define( 'NONCE_KEY',        'whatthehellisthis!!!' );
-define( 'AUTH_SALT',        'reallysecuresaltlol!!!' );
-define( 'SECURE_AUTH_SALT', 'thisisnotunique!!!' );
-define( 'LOGGED_IN_SALT',   'easytoguess!!!' );
-define( 'NONCE_SALT',       'sendnudesxoxo!!!' );
+define( 'AUTH_KEY',         '' );
+define( 'SECURE_AUTH_KEY',  '' );
+define( 'LOGGED_IN_KEY',    '' );
+define( 'NONCE_KEY',        '' );
+define( 'AUTH_SALT',        '' );
+define( 'SECURE_AUTH_SALT', '' );
+define( 'LOGGED_IN_SALT',   '' );
+define( 'NONCE_SALT',       '' );
 
 /**#@-*/
 

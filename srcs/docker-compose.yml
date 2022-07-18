@@ -38,19 +38,19 @@ services:
   mariadb:
     container_name: mariadb_c
     build:
-      context: ./mariadb
+      context: ./requirements/mariadb
     env_file:
       - .env
     volumes:
       - MariaDB:/var/lib/mysql
     networks:
       - localhost
-    # restart: always
+    restart: always
 
   nginx:
     container_name: nginx_c
     build:
-      context: ./nginx
+      context: ./requirements/nginx
     ports:
       - "443:443"
     volumes:
@@ -59,12 +59,12 @@ services:
       - localhost
     depends_on:
       - wordpress
-    # restart: always
+    restart: always
 
   wordpress:
     container_name: wordpress_c
     build:
-      context: ./wordpress
+      context: ./requirements/wordpress
     env_file:
       - .env
     depends_on:
@@ -73,7 +73,7 @@ services:
       - WordPress:/var/www/wordpress
     networks:
       - localhost
-    # restart: always
+    restart: always
 
 
 networks:
