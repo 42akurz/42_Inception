@@ -34,7 +34,7 @@ COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
 COPY ./conf/wp-config.php /var/www/wordpress
 
 # script that runs the wordpress CLI installation process
-COPY ./installer.sh /
+COPY ./tools/installer.sh /
 
 # expose port 9000 inside docker network
 EXPOSE 9000

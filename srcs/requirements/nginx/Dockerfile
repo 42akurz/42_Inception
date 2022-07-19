@@ -36,8 +36,8 @@ COPY ./conf/my.conf /etc/nginx/sites-enabled/.
 
 # uncomment --> use default / static html --> also use different server config
 # RUN	mkdir template
-# COPY	my.html /template/.
-# COPY	my.html /etc/nginx/sites-available/.
+# COPY	./tools/my.html /template/.
+# COPY	./tools/my.html /etc/nginx/sites-available/.
 
 # run nginx in foreground
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]

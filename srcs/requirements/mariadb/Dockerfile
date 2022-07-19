@@ -6,7 +6,7 @@ RUN apt-get update -y && \
 	apt install -y mariadb-server
 
 # mariadb installation script
-COPY ./installer.sh /
+COPY ./tools/installer.sh /
 
 # official mariaDB config
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
