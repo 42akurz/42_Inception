@@ -6,7 +6,6 @@ FROM debian:buster
 # mariadb-client --> MariaDB client is the tool which can be used for establishing the connection and interaction with the 
 #					 MariaDB server from the client-side by the user of the database.
 # curl --> Performs remote request operations.
-
 RUN apt-get update -y && \
 	apt-get upgrade -y && \
 	apt-get install -y php7.3 \
@@ -15,8 +14,6 @@ RUN apt-get update -y && \
 	mariadb-client \
 	curl && \
 	apt-get update -y
-
-COPY ./wp-config.php /
 
 # create wordpress direcory -> wordpress CLI will be downloaded here
 RUN mkdir -p /var/www/wordpress
@@ -30,11 +27,16 @@ RUN chmod +x wp-cli.phar
 # change executable name to wp
 RUN mv wp-cli.phar /usr/local/bin/wp
 
-# phpp fpm config
-COPY ./www.conf /etc/php/7.3/fpm/pool.d
+# php-fpm config
+COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
 
+# official wordpress config
+COPY ./conf/wp-config.php /var/www/wordpress
+
+# script that runs the wordpress CLI installation process
 COPY ./installer.sh /
 
+# expose port 9000 inside docker network
 EXPOSE 9000
 
 # run wordpress installation script

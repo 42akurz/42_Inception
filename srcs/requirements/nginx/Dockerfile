@@ -31,8 +31,13 @@ RUN openssl req -newkey rsa:4096 \
 			-keyout self-signed.key \
 			-subj "/C=DE/ST=Baden-Württemberg/L=Heilbronn/O=./OU=./CN=10.11.249.212"
 
-# put config file in sites-enabled -> nginx reads it from there
-COPY my.conf /etc/nginx/sites-enabled/.
+# put nginx config file in sites-enabled -> nginx reads it from there
+COPY ./conf/my.conf /etc/nginx/sites-enabled/.
+
+# uncomment --> use default / static html --> also use different server config
+# RUN	mkdir template
+# COPY	my.html /template/.
+# COPY	my.html /etc/nginx/sites-available/.
 
 # run nginx in foreground
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]

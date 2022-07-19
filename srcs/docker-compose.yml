@@ -10,7 +10,6 @@ version: '3.9'
 # The volume’s contents exist outside the lifecycle of a given container.
 
 
-
 # volumes:      While it is possible to declare volumes on the fly as part of the service declaration, 
 #               this section allows you to create named volumes that can be reused across multiple services
 # driver:       specify which volume driver should be used for this volume. 
