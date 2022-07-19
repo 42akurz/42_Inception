@@ -30,6 +30,7 @@ RUN chmod +x wp-cli.phar
 # change executable name to wp
 RUN mv wp-cli.phar /usr/local/bin/wp
 
+# phpp fpm config
 COPY ./www.conf /etc/php/7.3/fpm/pool.d
 
 COPY ./installer.sh /

@@ -8,6 +8,7 @@ RUN apt-get update -y && \
 
 COPY ./installer.sh /
 
+# official mariaDB config
 COPY ./50-server.cnf /etc/mysql/mariadb.conf.d/
 
 EXPOSE 3306

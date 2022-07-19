@@ -1,7 +1,10 @@
 #!/bin/bash
 
+sleep 5
+
 wp core download --allow-root
 
+# official worpress conifg
 cp /wp-config.php /var/www/wordpress/
 
 # install wp
